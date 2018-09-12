@@ -11,7 +11,9 @@
 	<name>StudentService</name>
 	<description>Demo project for Spring Boot Student service</description>
 
-	<parent>
+	
+
+<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.4.RELEASE</version>
@@ -45,6 +47,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

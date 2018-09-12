@@ -25,14 +25,31 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Override
 	public StudentResponseDto deleteStudent(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		StudentResponseDto srd = new StudentResponseDto();
+		Student student = studentRepository.removeStudent(id);
+		if(student != null) {
+			srd.setId(student.getId());
+			srd.setName(student.getName());
+			srd.setScores(student.getScores());
+		}
+		return srd;
 	}
 
 	@Override
 	public StudentDto editStudent(int id, StudentEditDto student) {
-		// TODO Auto-generated method stub
-		return null;
+		Student stu = studentRepository.getStudentById(id);
+		StudentDto sDto = new StudentDto();
+		if(stu != null) {
+		String name = student.getName();
+		String password = student.getPassword();
+		stu.setName(name);
+		stu.setPassword(password);
+		studentRepository.editStudent(stu);
+		sDto.setName(name);
+		sDto.setPassword(password);
+		sDto.setId(id);
+		}
+		return sDto;
 	}
 
 	@Override
@@ -47,8 +64,14 @@ public class StudentServiceImpl implements IStudentService {
 
 	@Override
 	public boolean addScore(int id, ScoreDto score) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		Student student = studentRepository.getStudentById(id);
+		if(student != null) {
+			student.getScores().put(score.getExamName(), score.getScore());
+		}else {
+			return false;
+		}
+		return true;
 	}
 
 }
